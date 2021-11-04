@@ -17,7 +17,7 @@ namespace Smartstore.Data.SqlServer
 {
     public class SqlServerDataProvider : DataProvider
     {
-        private readonly static HashSet<int> _transientErrorCodes = new(new[]
+        private readonly static HashSet<int> _transientErrorCodes = new[]
         {
             49920, // Cannot process request. Too many operations in progress for subscription "%ld".
             49919, // Cannot process create or update request. Too many create or update operations in progress for subscription "%ld".
@@ -27,7 +27,7 @@ namespace Smartstore.Data.SqlServer
             10936, // Resource ID : %d. The request limit for the elastic pool is %d and has been reached.
             1205,  // Deadlock
             20     // This exception can be thrown even if the operation completed successfully, so it's safer to let the application fail.
-        });
+        };
 
         private readonly static int[] _uniquenessViolationErrorCodes = new[]
         {

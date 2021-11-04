@@ -115,8 +115,9 @@ namespace Smartstore.Net.Mail
 
         private static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            // TODO: (core) Make ValidateServerCertificate overridable later. 
-            return true;
+            if (development) return true;
+            return sslPolicyErrors == SslPolicyErrors.None
+                && validCerts.Contains(certificate.GetCertHashString());
         }
 
         #region Converters
