@@ -53,7 +53,7 @@ namespace Smartstore.Core.Checkout.Payment
 
         /// <inheritdoc/>
         public virtual Task PostProcessPaymentAsync(PostProcessPaymentRequest postProcessPaymentRequest)
-            => null;
+            => Task.FromResult(null);
 
         /// <inheritdoc/>
         public virtual Task<(decimal FixedFeeOrPercentage, bool UsePercentage)> GetPaymentFeeInfoAsync(ShoppingCart cart)

@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-(function ($, window, document, undefined) {
+(function ($, window, document, notDefined) {
     var viewport = ResponsiveBootstrapToolkit;
 
     function wrapLayer(response, addClasses, id) {
