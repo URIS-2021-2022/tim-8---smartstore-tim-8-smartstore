@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\Build\Smartstore.Common.props" />
+
+	<PropertyGroup>
+	  <AnalysisLevel>latest</AnalysisLevel>
+	</PropertyGroup>
   
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

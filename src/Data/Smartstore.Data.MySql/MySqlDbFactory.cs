@@ -25,7 +25,7 @@ namespace Smartstore.Data.MySql
         public override DbConnectionStringBuilder CreateConnectionStringBuilder(
             string server,
             string database,
-            string userId,
+            string userName,
             string password)
         {
             Guard.NotEmpty(server, nameof(server));
@@ -69,23 +69,25 @@ namespace Smartstore.Data.MySql
             {
                 var extension = builder.Options.FindExtension<DbFactoryOptionsExtension>();
 
-                if (extension != null)
+                if(extension == null)
                 {
-                    if (extension.CommandTimeout.HasValue)
-                        sql.CommandTimeout(extension.CommandTimeout.Value);
-
-                    if (extension.MinBatchSize.HasValue)
-                        sql.MinBatchSize(extension.MinBatchSize.Value);
-
-                    if (extension.MaxBatchSize.HasValue)
-                        sql.MaxBatchSize(extension.MaxBatchSize.Value);
-
-                    if (extension.QuerySplittingBehavior.HasValue)
-                        sql.UseQuerySplittingBehavior(extension.QuerySplittingBehavior.Value);
-
-                    if (extension.UseRelationalNulls.HasValue)
-                        sql.UseRelationalNulls(extension.UseRelationalNulls.Value);
+                    return;
                 }
+
+                if (extension.CommandTimeout.HasValue)
+                    sql.CommandTimeout(extension.CommandTimeout.Value);
+
+                if (extension.MinBatchSize.HasValue)
+                    sql.MinBatchSize(extension.MinBatchSize.Value);
+
+                if (extension.MaxBatchSize.HasValue)
+                    sql.MaxBatchSize(extension.MaxBatchSize.Value);
+
+                if (extension.QuerySplittingBehavior.HasValue)
+                    sql.UseQuerySplittingBehavior(extension.QuerySplittingBehavior.Value);
+
+                if (extension.UseRelationalNulls.HasValue)
+                    sql.UseRelationalNulls(extension.UseRelationalNulls.Value);
             });
         }
 

@@ -79,7 +79,10 @@ namespace Smartstore.Core.Catalog.Attributes
         /// </summary>
         public ICollection<ProductAttributeOptionsSet> ProductAttributeOptionsSets
         {
-            get => _productAttributeOptionsSets ?? LazyLoader.Load(this, ref _productAttributeOptionsSets) ?? (_productAttributeOptionsSets ??= new HashSet<ProductAttributeOptionsSet>());
+          
+            
+            get => _productAttributeOptionsSets ?? LazyLoader.Load(this, ref _productAttributeOptionsSets);
+            set => _productAttributeOptionsSets ??= new HashSet<ProductAttributeOptionsSet>();
             protected set => _productAttributeOptionsSets = value;
         }
     }
