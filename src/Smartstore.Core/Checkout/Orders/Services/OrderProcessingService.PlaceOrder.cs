@@ -130,7 +130,7 @@ namespace Smartstore.Core.Checkout.Orders
             ShoppingCart cart = null;
             var skipPaymentWorkflow = false;
             var isRecurringCart = false;
-            var paymentMethodSystemName = paymentRequest.PaymentMethodSystemName;
+            var paymentMethodSystemName;
 
             if (customer == null)
             {
@@ -576,9 +576,6 @@ namespace Smartstore.Core.Checkout.Orders
             }
 
             var skipPaymentWorkflow = ctx.CartTotal.Total.Value == decimal.Zero;
-            var paymentMethod = !skipPaymentWorkflow
-                ? await _paymentService.LoadPaymentMethodBySystemNameAsync(pr.PaymentMethodSystemName)
-                : null;
 
             if (skipPaymentWorkflow)
             {

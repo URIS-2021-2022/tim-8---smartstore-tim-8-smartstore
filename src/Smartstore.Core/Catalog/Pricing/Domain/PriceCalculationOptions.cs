@@ -93,7 +93,7 @@ namespace Smartstore.Core.Catalog.Pricing
         /// Generally this is the working currency (default), Order.CustomerCurrencyCode (for existing orders) 
         /// or DataExporterContext.ContextCurrency (for exports).
         /// </summary>
-        internal Currency RoundingCurrency { get; init; }
+        internal Currency RoundingCurrency { get; set; }
 
         /// <summary>
         /// Gets or sets product batch context for nested pipelines (grouped or bundled products).
@@ -143,7 +143,6 @@ namespace Smartstore.Core.Catalog.Pricing
         /// <summary>
         /// Gets cash rounding options.
         /// </summary>
-        //public CashRoundingOptions CashRounding { get; init; } = new();
 
         /// <summary>
         /// Gets or sets the optional tax format string (e.g. "{0} *", "{0} incl. tax")

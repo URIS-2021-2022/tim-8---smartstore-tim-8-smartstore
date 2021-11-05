@@ -49,7 +49,7 @@ namespace Smartstore.Core.Checkout.GiftCards
                                 var code = element.Attribute("Code")?.Value ?? null;
                                 if (code.HasValue())
                                 {
-                                    attributes.Add(new(code));
+                                    attributes.Add(new code());
                                 }
                             }
 
@@ -89,7 +89,7 @@ namespace Smartstore.Core.Checkout.GiftCards
                 return base.ConvertTo(culture, format, value, to);
             }
 
-            if (value is not null and IEnumerable<GiftCardCouponCode> attributes)
+            if (!value && IEnumerable<GiftCardCouponCode> attributes)
             {
                 // XML
                 //var root = new XElement("Attributes");
@@ -126,9 +126,9 @@ namespace Smartstore.Core.Checkout.GiftCards
             Value = value;
         }
 
-        public string Value { get; init; }
+        public string Value { get; set; }
 
         public static explicit operator string(GiftCardCouponCode code) => code.Value;
-        public static explicit operator GiftCardCouponCode(string code) => new(code);
+        public static explicit operator GiftCardCouponCode(string code) => new code();
     }
 }

@@ -240,11 +240,7 @@ namespace Smartstore.Core.Catalog.Categories
 
                 await scope.CommitAsync();
 
-                try
-                {
-                    scope.DbContext.DetachEntities(x => x is Product || x is Category || x is AclRecord, false);
-                }
-                catch { }
+                scope.DbContext.DetachEntities(x => x is Product || x is Category || x is AclRecord, false);
 
                 foreach (var subCategory in subCategories)
                 {

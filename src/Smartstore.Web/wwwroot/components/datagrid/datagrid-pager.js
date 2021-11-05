@@ -111,7 +111,7 @@
             }
 
             for (var i = start; i <= p; i++) {
-                items.push({ page: i, label: i.toString(), active: i === currentIndex });
+                items.push({ page: i, label: i.toString(), active: i == currentIndex });
             }
 
             if (p < totalPages) {

@@ -60,7 +60,7 @@ namespace Smartstore.Core.Content.Media
             return CheckUniqueFileName(title, ext, new HashSet<string>(new[] { destFileName }, StringComparer.CurrentCultureIgnoreCase), out uniqueName);
         }
 
-        public bool CheckUniqueFileName(string title, string ext, HashSet<string> destFileNames, out string uniqueName)
+        public static bool CheckUniqueFileName(string title, string ext, HashSet<string> destFileNames, out string uniqueName)
         {
             uniqueName = null;
 

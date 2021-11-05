@@ -14,7 +14,6 @@ namespace Smartstore.Core.Content.Media
     {
         const string _fallbackImagesRootPath = "images/";
 
-        private readonly IMediaStorageConfiguration _storageConfig;
         private readonly MediaSettings _mediaSettings;
 
         private readonly string _host;

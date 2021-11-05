@@ -543,7 +543,7 @@ namespace Smartstore.Core.DataExchange.Import
                 return;
             }
 
-            if (address.Id == 0)
+            if (address != null && address.Id == 0)
             {
                 // Avoid importing two addresses if billing and shipping address are equal.
                 var appliedAddress = row.Entity.Addresses.FindAddress(address);

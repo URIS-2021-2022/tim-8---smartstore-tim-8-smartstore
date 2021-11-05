@@ -97,8 +97,9 @@ namespace Smartstore.Core.Catalog.Products
                         productBundleOrderItemData[i].RawAttributes = elements[i].Value;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+					throw new Exception(ex);
                 }
             }
 
