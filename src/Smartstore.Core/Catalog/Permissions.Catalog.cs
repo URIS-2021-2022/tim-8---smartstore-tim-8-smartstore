@@ -9,7 +9,7 @@
 
             public static class Product
             {
-                public const string Self = "catalog.product";
+                public const string SelfProd = "catalog.product";
                 public const string Read = "catalog.product.read";
                 public const string Update = "catalog.product.update";
                 public const string Create = "catalog.product.create";
@@ -28,7 +28,7 @@
 
             public static class ProductReview
             {
-                public const string Self = "catalog.productreview";
+                public const string SelfReview = "catalog.productreview";
                 public const string Read = "catalog.productreview.read";
                 public const string Update = "catalog.productreview.update";
                 public const string Create = "catalog.productreview.create";
@@ -38,7 +38,7 @@
 
             public static class Category
             {
-                public const string Self = "catalog.category";
+                public const string SelfCat = "catalog.category";
                 public const string Read = "catalog.category.read";
                 public const string Update = "catalog.category.update";
                 public const string Create = "catalog.category.create";
@@ -48,7 +48,7 @@
 
             public static class Manufacturer
             {
-                public const string Self = "catalog.manufacturer";
+                public const string SelfMan = "catalog.manufacturer";
                 public const string Read = "catalog.manufacturer.read";
                 public const string Update = "catalog.manufacturer.update";
                 public const string Create = "catalog.manufacturer.create";
@@ -58,7 +58,7 @@
 
             public static class Variant
             {
-                public const string Self = "catalog.variant";
+                public const string SelfVar = "catalog.variant";
                 public const string Read = "catalog.variant.read";
                 public const string Update = "catalog.variant.update";
                 public const string Create = "catalog.variant.create";
@@ -68,7 +68,7 @@
 
             public static class Attribute
             {
-                public const string Self = "catalog.attribute";
+                public const string SelfAtt = "catalog.attribute";
                 public const string Read = "catalog.attribute.read";
                 public const string Update = "catalog.attribute.update";
                 public const string Create = "catalog.attribute.create";

@@ -58,17 +58,17 @@ namespace Smartstore.Core.Catalog.Pricing
         /// <summary>
         /// Display prices without badges
         /// </summary>
-        Default = 1,
+        PriceDisplayStyleDefault = 1,
 
         /// <summary>
         /// Display all prices within badges
         /// </summary>
-        BadgeAll = 2,
+        PriceDisplayStyleBadgeAll = 2,
 
         /// <summary>
         /// Display prices of free products within badges 
         /// </summary>
-        BadgeFreeProductsOnly = 4
+        PriceDisplayStyleBadgeFreeProductsOnly = 4
     }
 
     /// <summary>
