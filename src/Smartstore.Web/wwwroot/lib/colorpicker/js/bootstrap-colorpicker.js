@@ -541,7 +541,6 @@
 						}
 						return 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
 					}
-					break;
 				case 'rgba':
 					{
 						c = this.toRGB();

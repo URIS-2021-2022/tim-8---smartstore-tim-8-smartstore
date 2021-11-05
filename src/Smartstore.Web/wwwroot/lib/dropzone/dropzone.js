@@ -96,11 +96,7 @@ var Emitter =
                             if (!_iteratorNormalCompletion && _iterator["return"] != null) {
                                 _iterator["return"]();
                             }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
-                        }
+                        } 
                     }
                 }
 

@@ -192,7 +192,7 @@ namespace Smartstore
 
             if (!Enum.IsDefined(enumType, arg))
             {
-                throw new ArgumentException(string.Format(IsEnumTypeMessage2, enumType.FullName), argName);
+                throw new ArgumentException(string.Format(IsEnumTypeMessage2, argName, enumType.FullName), argName);
             }
         }
 

@@ -135,8 +135,6 @@ namespace Smartstore
                         return false;
                     }
                 }
-
-                return true;
             }
         }
 
