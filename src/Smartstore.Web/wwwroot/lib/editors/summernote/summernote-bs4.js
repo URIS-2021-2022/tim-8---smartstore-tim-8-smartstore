@@ -5941,7 +5941,7 @@ var Editor_Editor = /*#__PURE__*/function () {
     value: function insertImage(src, param) {
       var _this3 = this;
 
-      return createImage(src, param).then(function ($image) {
+      return createImage(src).then(function ($image) {
         _this3.beforeCommand();
 
         if (typeof param === 'function') {

@@ -197,16 +197,16 @@ namespace Smartstore.Tests
         public void CanConvertShippingOptions()
         {
             //// TODO: (core) uncomment later when ShippingOption is available
-            //var shippingOption = new ShippingOption
-            //{
-            //    ShippingMethodId = 2,
-            //    Name = "Name",
-            //    Description = "Desc",
-            //    Rate = 1,
-            //    ShippingRateComputationMethodSystemName = "SystemName"
-            //};
-            //var soStr = shippingOption.Convert<string>();
-            //Assert.IsNotEmpty(soStr);
+            var shippingoption = new shippingoption
+            {
+                shippingmethodid = 2,
+                name = "name",
+                description = "desc",
+                rate = 1,
+                shippingratecomputationmethodsystemname = "systemname"
+            };
+            var sostr = shippingoption.convert<string>();
+            assert.isnotempty(sostr);
 
             //var arr = (new[] { shippingOption.Convert<string>() }).Convert<ShippingOption[]>();
             //arr.ShouldBe<ShippingOption[]>();

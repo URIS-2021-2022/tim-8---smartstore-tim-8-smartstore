@@ -24,36 +24,37 @@
 <form asp-action="CustomerSubscriptions">
 	<div id="subscription-list" class="subscription-list mt-3">
 		<div class="table-responsive">
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="width: 30px">
-							<input type="checkbox" id="select-all-subscriptions" />
-						</th>
-						<th>
-							@T("Account.ForumSubscriptions.InfoColumn")
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model.ForumSubscriptions)
+            <table class="table">
+                <caption>Customer Subscriptions</caption>
+                <thead>
+                    <tr>
+                        <th style="width: 30px">
+                            <input type="checkbox" id="select-all-subscriptions" />
+                        </th>
+                        <th>
+                            @T("Account.ForumSubscriptions.InfoColumn")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ForumSubscriptions)
 					{
-						<tr>
-							<td style="width: 30px">
-								<input type="checkbox" name="fs@(item.Id)" class="rowcheckbox" />
-							</td>
-							<td dir="auto">
-								<a sm-if="item.TopicSubscription" asp-route="ForumTopicBySlug" asp-route-id="@item.ForumTopicId" asp-route-slug="@item.Slug">
-									@item.Title
-								</a>
-								<a sm-if="!item.TopicSubscription" asp-route="ForumBySlug" asp-route-id="@item.ForumId" asp-route-slug="@item.Slug">
-									@item.Title
-								</a>
-							</td>
-						</tr>
+                    <tr>
+                        <td style="width: 30px">
+                            <input type="checkbox" name="fs@(item.Id)" class="rowcheckbox" />
+                        </td>
+                        <td dir="auto">
+                            <a sm-if="item.TopicSubscription" asp-route="ForumTopicBySlug" asp-route-id="@item.ForumTopicId" asp-route-slug="@item.Slug">
+                                @item.Title
+                            </a>
+                            <a sm-if="!item.TopicSubscription" asp-route="ForumBySlug" asp-route-id="@item.ForumId" asp-route-slug="@item.Slug">
+                                @item.Title
+                            </a>
+                        </td>
+                    </tr>
 					}
-				</tbody>
-			</table>
+                </tbody>
+            </table>
 		</div>
 		
 		@if (Model.ForumSubscriptions.TotalPages > 1)

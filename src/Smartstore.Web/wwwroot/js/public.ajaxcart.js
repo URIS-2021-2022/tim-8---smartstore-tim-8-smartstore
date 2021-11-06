@@ -47,7 +47,7 @@ var AjaxCart = (function ($, window, document, undefined) {
             // Therefore input names are not in the form anymore as the ShoppingCartController 
             // expects them. Hacking here ist much easier than refactoring the controller method.
             // But change this in future of couse.
-            arr = str.split(".");
+            var arr = str.split(".");
             if (arr.length == 3 && arr[1] == "AddToCart") {
                 str = arr[0] + "." + arr[2];
             }
