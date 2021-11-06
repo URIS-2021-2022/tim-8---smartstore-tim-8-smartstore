@@ -370,7 +370,6 @@ namespace Smartstore.Core.Catalog.Attributes
             }
 
             //foreach (var y in resultMatrix)
-            //{
             //	var sb = new System.Text.StringBuilder();
             //	foreach (var x in y)
             //	{

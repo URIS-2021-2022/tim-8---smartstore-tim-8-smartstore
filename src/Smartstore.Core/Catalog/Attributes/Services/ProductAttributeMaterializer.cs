@@ -259,7 +259,7 @@ namespace Smartstore.Core.Catalog.Attributes
                                 {
                                     if (postedFile.Length > _catalogSettings.Value.FileUploadMaximumSizeBytes)
                                     {
-                                        warnings.Add(T("ShoppingCart.MaximumUploadedFileSize", (int)(_catalogSettings.Value.FileUploadMaximumSizeBytes / 1024)));
+                                        warnings.Add(T("ShoppingCart.MaximumUploadedFileSize", (_catalogSettings.Value.FileUploadMaximumSizeBytes / 1024)));
                                     }
                                     else
                                     {

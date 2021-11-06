@@ -108,12 +108,9 @@ namespace Smartstore.Data.SqlServer
             if (provider != null)
             {
                 var translators = _translatorsField.GetValue(provider) as List<IMethodCallTranslator>;
-                if (translators != null)
-                {
-                    if (sourceMethod.Name.StartsWith("DateDiff"))
-                    {
-                        return translators.FirstOrDefault(x => x is SqlServerDateDiffFunctionsTranslator);
-                    }
+                if (translators != null && sourceMethod.Name.StartWith("DateDiff"))
+                { 
+                    return translators.FirstOrDefault(x => x is SqlServerDateDiffFunctionsTranslator);
                 }
             }
 
