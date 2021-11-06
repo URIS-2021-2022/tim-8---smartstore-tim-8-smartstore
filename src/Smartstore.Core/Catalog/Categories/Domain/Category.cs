@@ -220,7 +220,8 @@ namespace Smartstore.Core.Catalog.Categories
         /// </summary>
         public ICollection<RuleSetEntity> RuleSets
         {
-            get => LazyLoader?.Load(this, ref _ruleSets) ?? (_ruleSets ??= new HashSet<RuleSetEntity>());
+            _ruleSets = new HashSet<RuleSetEntity>();
+            get => LazyLoader?.Load(this, ref _ruleSets) ?? _ruleSets;
             protected set => _ruleSets = value;
         }
 
