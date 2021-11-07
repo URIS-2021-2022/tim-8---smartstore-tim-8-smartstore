@@ -144,17 +144,13 @@ namespace Smartstore.Core.DataExchange.Import
                 }
 
                 // We can make the parent category assignment only after all the data has been processed and imported.
-                if (segmenter.IsLastSegment)
+                if (segmenter.IsLastSegment && segmenter.HasColumn("Id") && segmenter.HasColumn("ParentCategoryId") && !segmenter.IsIgnored("ParentCategoryId"))
                 {
                     // ===========================================================================
                     // Process parent category mappings.
                     // ===========================================================================
-                    if (segmenter.HasColumn("Id") &&
-                        segmenter.HasColumn("ParentCategoryId") &&
-                        !segmenter.IsIgnored("ParentCategoryId"))
-                    {
-                        await ProcessParentMappingsAsync(context, scope, batch);
-                    }
+                    
+                        await ProcessParentMappingsAsync(context, scope, batch); 
                 }
             }
 

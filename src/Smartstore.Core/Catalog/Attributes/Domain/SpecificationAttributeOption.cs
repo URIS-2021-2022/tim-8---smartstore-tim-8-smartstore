@@ -81,14 +81,15 @@ namespace Smartstore.Core.Catalog.Attributes
         /// </summary>
         [StringLength(100)]
         public string Color { get; set; }
-
+        
         private ICollection<ProductSpecificationAttribute> _productSpecificationAttributes;
         /// <summary>
         /// Gets or sets the product specification attribute mappings.
         /// </summary>
         public ICollection<ProductSpecificationAttribute> ProductSpecificationAttributes
         {
-            get => _productSpecificationAttributes = LazyLoader.Load(this, ref _productSpecificationAttributes) ?? (_productSpecificationAttributes ??= new HashSet<ProductSpecificationAttribute>());
+            _productSpecificationAttributes = LazyLoader.Load(this, ref _productSpecificationAttributes) ?? (_productSpecificationAttributes ??= new HashSet<ProductSpecificationAttribute>());
+            get => _productSpecificationAttributes;
             protected set => _productSpecificationAttributes = value;
         }
     }

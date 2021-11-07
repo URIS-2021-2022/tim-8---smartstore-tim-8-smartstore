@@ -36,6 +36,8 @@ namespace Smartstore.Core.Checkout.Payment
         private readonly IProviderManager _providerManager;
         private readonly IRequestCache _requestCache;
         private readonly ITypeScanner _typeScanner;
+        
+        private Logger logger = new Logger();
 
         public PaymentService(
             SmartDbContext db,
@@ -383,8 +385,10 @@ namespace Smartstore.Core.Checkout.Payment
                 result.Errors.Add(T("Common.Payment.NoRecurringPaymentSupport"));
                 return result;
             }
-            catch
+            catch(e)
             {
+                
+                logger.LogError(e);
                 throw;
             }
         }
