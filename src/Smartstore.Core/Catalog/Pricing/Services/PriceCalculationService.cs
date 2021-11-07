@@ -251,7 +251,7 @@ namespace Smartstore.Core.Catalog.Pricing
             var basePrice = Convert.ToDecimal((price / product.BasePriceAmount) * product.BasePriceBaseAmount);
             var basePriceAmount = _currencyService.ApplyTaxFormat(
                 new Money(basePrice, targetCurrency ?? _workContext.WorkingCurrency),
-                includePackageContentPerUnit ? null : false,
+                includePackageContentPerUnit ? null : includePackageContentPerUnit,
                 null,
                 language);
 

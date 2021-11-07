@@ -77,7 +77,7 @@ namespace Smartstore.Core.Content.Media
                 return sourceBuffer;
             }
 
-            return null;
+            return new byte[0];
         }
 
         /// <summary>

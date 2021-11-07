@@ -1032,9 +1032,10 @@ $.extend($.validator, {
 				// could be an array for select-multiple or a string, both are fine this way
 				var val = $(element).val();
 				return val && val.length > 0;
-			case 'input':
-				if ( this.checkable(element) )
-					return this.getLength(value, element) > 0;
+				case 'input':
+					if (this.checkable(element))
+						return this.getLength(value, element) > 0;
+					break;
 			default:
 				return $.trim(value).length > 0;
 			}

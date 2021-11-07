@@ -87,7 +87,7 @@ namespace Smartstore.Core.Content.Media
             {
                 // Redirect legacy URL "/{tenant?}/uploaded/some/file.png" to "/file/1234/some/file.png"
                 mediaFile = await mediaService.GetFileByPathAsync(
-                    SystemAlbumProvider.Files + "/" + path, 
+                    SystemAlbumProvider.Files + path, 
                     MediaLoadFlags.AsNoTracking);
             }
 
