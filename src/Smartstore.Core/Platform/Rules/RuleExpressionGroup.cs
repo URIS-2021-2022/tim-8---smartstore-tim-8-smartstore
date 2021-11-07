@@ -37,11 +37,6 @@ namespace Smartstore.Core.Rules
             _expressions.AddRange(expressions);
         }
 
-        public override bool Equals(object o)
-        {
-            //
-        }
-
         public override int GetHashCode()
         {
             var combiner = HashCodeCombiner

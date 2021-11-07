@@ -97,7 +97,7 @@ namespace Smartstore.Core.Localization
         {
             if (_value == null)
             {
-                return string.Empty;
+                return null;
             }
 
             if (typeof(T) == typeof(string))

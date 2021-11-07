@@ -32,14 +32,14 @@
     @if (Model.DisplayAdminLink)
     {
         <a class="btn btn-secondary btn-flat btn-admin-edit" asp-action="Edit" asp-controller="Blog" asp-area="Admin" asp-route-id="@Model.Id" target="admin-blogpost" rel="nofollow">
-            <em class="fa fa-cog"></em>
+            <i class="fa fa-cog"></i>
             <span>@T("Common.Cms.EditBlogpost")</span>
         </a>
     }
 
     <div sm-if="Model.Image != null" class="shadow-sm-primary mb-3">
         <figure class="single-media-item-image">
-            <img sm-file="Model.Image.File" alt="Some description of Model.Image.File" />
+            <img sm-file="Model.Image.File" />
         </figure>
     </div>
 

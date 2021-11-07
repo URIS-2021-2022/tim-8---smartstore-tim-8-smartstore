@@ -76,7 +76,7 @@ namespace Smartstore.Core.Widgets
                 return HashCode.Combine(GetType(), Key);
             }
 
-            return GetHashCode();
+            return base.GetHashCode();
         }
 
         #endregion

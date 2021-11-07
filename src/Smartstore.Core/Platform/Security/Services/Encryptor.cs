@@ -45,7 +45,7 @@ namespace Smartstore.Core.Security
             if (string.IsNullOrEmpty(privateKey))
                 privateKey = _securitySettings.EncryptionKey;
 
-            using var provider = new AesCryptoServiceProvider();
+            using var provider = TripleDES.Create();
             provider.Key = Encoding.ASCII.GetBytes(privateKey.Substring(0, 16));
             provider.IV = Encoding.ASCII.GetBytes(privateKey.Substring(8, 8));
 
