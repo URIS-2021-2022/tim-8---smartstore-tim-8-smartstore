@@ -14,7 +14,7 @@ namespace Smartstore.Core.Common
     /// <summary>
     /// Generic attribute collection base implementation for covariance or <typeparamref name="TEntity"/> specific extension methods.
     /// </summary>
-    public class GenericAttributeCollection<TEntity> : GenericAttributeCollection
+    public class GenericAttributeCollection : GenericAttributeCollection
         where TEntity : BaseEntity
     {
         private readonly GenericAttributeCollection _innerCollection;

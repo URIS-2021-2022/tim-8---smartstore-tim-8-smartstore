@@ -441,15 +441,12 @@ namespace Smartstore.Redis.Caching
 
         #region Utilities
 
-        private bool RedisAction(bool condition, Action action)
+        private void RedisAction(bool condition, Action action)
         {
             if (condition && CheckLicense() && CheckConnection())
             {
                 action();
-                return true;
             }
-
-            return false;
         }
 
         private async Task<bool> RedisActionAsync(bool condition, Func<Task> action)

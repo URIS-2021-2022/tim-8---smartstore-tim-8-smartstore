@@ -6,6 +6,7 @@ using Smartstore.Collections;
 using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Http;
 using Smartstore.Imaging;
+using System.Text;
 
 namespace Smartstore.Core.Content.Media.Imaging
 {
@@ -18,7 +19,7 @@ namespace Smartstore.Core.Content.Media.Imaging
             = new[] { "center", "top", "bottom", "left", "right", "top-left", "top-right", "bottom-left", "bottom-right" };
 
         // Key = Supported token name, Value = Validator
-        private readonly static Dictionary<string, Func<string, string, bool>> _supportedTokens = new()
+        private readonly static Dictionary<string, Func<string, string, bool>> _supportedTokens = new Dictionary<string, Func<string, string, bool>>
         {
             ["w"] = (k, v) => ValidateSizeToken(k, v),
             ["h"] = (k, v) => ValidateSizeToken(k, v),
@@ -206,15 +207,15 @@ namespace Smartstore.Core.Content.Media.Imaging
         public string CreateHash()
         {
             var hash = string.Empty;
+            StringBuilder sb = new StringBuilder();
 
             foreach (var key in this.Keys)
             {
                 if (key == "m" && this["m"] == "max")
                     continue; // Mode 'max' is default and can be omitted
-
-                hash += "-" + key + this[key];
+                sb.Append("-" + key + this[key]);
             }
-
+            hash = sb.ToString();
             return hash;
         }
 

@@ -33,6 +33,15 @@ namespace Smartstore.Core.Content.Media
             return Task.CompletedTask;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Task TrackAsync(this IMediaTracker tracker, MediaTrack track)
+        {
+            if (track == null)
+                return Task.CompletedTask;
+
+            return tracker.TrackManyAsync(new[] { track });
+        }
+
         public static Task UntrackAsync<T>(this IMediaTracker tracker, T entity, Expression<Func<T, int>> path) where T : BaseEntity, new()
         {
             Guard.NotNull(path, nameof(path));
@@ -57,14 +66,7 @@ namespace Smartstore.Core.Content.Media
             return Task.CompletedTask;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Task TrackAsync(this IMediaTracker tracker, MediaTrack track)
-        {
-            if (track == null)
-                return Task.CompletedTask;
-
-            return tracker.TrackManyAsync(new[] { track });
-        }
+        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Task UpdateTracksAsync(this IMediaTracker tracker, BaseEntity entity, int? prevMediaFileId, int? currentMediaFileId, string propertyName)

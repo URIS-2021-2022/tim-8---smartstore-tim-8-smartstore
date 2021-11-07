@@ -27,8 +27,7 @@ namespace Smartstore.Core.Catalog.Products
 
         protected override Task<HookResult> OnUpdatingAsync(ProductMediaFile entity, IHookedEntity entry, CancellationToken cancelToken)
         {
-            ProductPictureHelper.FixProductMainPictureId(_db, entity.Product);
-            return Task.FromResult(HookResult.Ok);
+            OnInsertingAsync(entity, entry, cancelToken);
         }
 
         protected override Task<HookResult> OnDeletingAsync(ProductMediaFile entity, IHookedEntity entry, CancellationToken cancelToken)

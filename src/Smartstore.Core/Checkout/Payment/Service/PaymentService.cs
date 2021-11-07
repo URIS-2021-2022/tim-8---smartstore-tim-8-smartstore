@@ -26,7 +26,7 @@ namespace Smartstore.Core.Checkout.Payment
         private const string PAYMENT_METHODS_ALL_KEY = "paymentmethod.all-{0}-";
         private const string PAYMENT_METHODS_PATTERN_KEY = "paymentmethod.*";
 
-        private readonly static object _lock = new();
+        private readonly static object _lock;
         private static IList<Type> _paymentMethodFilterTypes = null;
 
         private readonly SmartDbContext _db;
@@ -263,14 +263,8 @@ namespace Smartstore.Core.Checkout.Payment
             await paymentMethod.Value.PostProcessPaymentAsync(postProcessPaymentRequest);
         }
 
-        public virtual async Task<bool> CanRePostProcessPaymentAsync(Order order)
-        {
-            if (order == null)
-                throw new ArgumentNullException(nameof(order));
-
-            if (!_paymentSettings.AllowRePostingPayments)
-                return false;
-
+        public virtual async Task<bool> CanRePostProcessPaymentAsyncInternal(Order order)
+		{
             var paymentMethod = await LoadPaymentMethodBySystemNameAsync(order.PaymentMethodSystemName);
             if (paymentMethod == null)
             {
@@ -278,7 +272,7 @@ namespace Smartstore.Core.Checkout.Payment
                 return false;
             }
 
-            if (paymentMethod.Value.PaymentMethodType is not PaymentMethodType.Redirection and not PaymentMethodType.StandardAndRedirection)
+            if (paymentMethod.Value.PaymentMethodType is not PaymentMethodType.Redirection && !PaymentMethodType.StandardAndRedirection)
             {
                 // This option is available only for redirection payment methods.
                 return false;
@@ -291,6 +285,17 @@ namespace Smartstore.Core.Checkout.Payment
             }
 
             return await paymentMethod.Value.CanRePostProcessPaymentAsync(order);
+        }
+
+        public virtual Task<bool> CanRePostProcessPaymentAsync(Order order)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            if (!_paymentSettings.AllowRePostingPayments)
+                return false;
+
+            return CanRePostProcessPaymentAsyncInternal(order);
         }
 
         public virtual async Task<CapturePaymentResult> CaptureAsync(CapturePaymentRequest capturePaymentRequest)

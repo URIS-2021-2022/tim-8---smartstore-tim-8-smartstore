@@ -52,7 +52,7 @@ namespace Smartstore.Web.TagHelpers.Shared
 
     public abstract class BundleTagHelper : TagHelper
     {
-        public BundleTagHelper(IAssetTagGenerator tagGenerator)
+        protected BundleTagHelper(IAssetTagGenerator tagGenerator)
         {
             TagGenerator = tagGenerator;
         }

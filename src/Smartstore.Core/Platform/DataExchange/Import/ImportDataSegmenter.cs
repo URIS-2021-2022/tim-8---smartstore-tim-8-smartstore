@@ -224,10 +224,7 @@ namespace Smartstore.Core.DataExchange.Import
 
         public bool ReadNextBatch()
         {
-            if (_currentBatch != null)
-            {
-                _currentBatch = null;
-            }
+            _currentBatch = null;
 
             if (_bof)
             {

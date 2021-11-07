@@ -196,63 +196,25 @@ namespace Smartstore.Tests
         [Test]
         public void CanConvertShippingOptions()
         {
-            //// TODO: (core) uncomment later when ShippingOption is available
-            //var shippingOption = new ShippingOption
-            //{
-            //    ShippingMethodId = 2,
-            //    Name = "Name",
-            //    Description = "Desc",
-            //    Rate = 1,
-            //    ShippingRateComputationMethodSystemName = "SystemName"
-            //};
-            //var soStr = shippingOption.Convert<string>();
-            //Assert.IsNotEmpty(soStr);
-
-            //var arr = (new[] { shippingOption.Convert<string>() }).Convert<ShippingOption[]>();
-            //arr.ShouldBe<ShippingOption[]>();
-            //Assert.AreEqual(1, arr.Length);
-            //Assert.AreEqual(arr[0].Name, "Name");
-
-            //shippingOption = soStr.Convert<ShippingOption>();
-            //Assert.IsNotNull(shippingOption);
-            //Assert.AreEqual(shippingOption.ShippingMethodId, 2);
-            //Assert.AreEqual(shippingOption.Name, "Name");
-            //Assert.AreEqual(shippingOption.Description, "Desc");
-            //Assert.AreEqual(shippingOption.Rate, 1);
-            //Assert.AreEqual(shippingOption.ShippingRateComputationMethodSystemName, "SystemName");
-
-            //var shippingOptions = new List<ShippingOption>
-            //{
-            //    new ShippingOption { ShippingMethodId = 1, Name = "Name1", Description = "Desc1" },
-            //    new ShippingOption { ShippingMethodId = 2, Name = "Name2", Description = "Desc2" }
-            //};
-            //soStr = shippingOptions.Convert<string>();
-            //Assert.IsNotEmpty(soStr);
-
-            //shippingOptions = soStr.Convert<List<ShippingOption>>();
-            //Assert.AreEqual(shippingOptions.Count, 2);
-            //Assert.AreEqual(shippingOptions[1].ShippingMethodId, 2);
-            //Assert.AreEqual(shippingOptions[1].Description, "Desc2");
-
-            //var shippingOptions2 = soStr.Convert<IList<ShippingOption>>();
-            //Assert.AreEqual(shippingOptions2.Count, 2);
-            //Assert.AreEqual(shippingOptions[1].ShippingMethodId, 2);
-            //Assert.AreEqual(shippingOptions2.First().Description, "Desc1");
+            var shippingOption = new ShippingOption
+            {
+                ShippingMethodId = 2,
+                Name = "Name",
+                Description = "Desc",
+                Rate = 1,
+                ShippingRateComputationMethodSystemName = "SystemName"
+            };
+            var soStr = shippingOption.Convert<string>();
+            Assert.IsNotEmpty(soStr);
         }
 
         [Test]
         public void CanConvertEmailAddress()
         {
-            //// TODO: (core) uncomment later when EmailAddress is available
-            //var list = (new[] { new EmailAddress("test@domain.com") }).Convert<IList<string>>();
-            //list.ShouldBe<IList<string>>();
-            //Assert.AreEqual(1, list.Count);
-            //Assert.AreEqual("test@domain.com", list[0]);
-
-            //var list2 = (new[] { "test@domain.com", "test2@domain.com" }).Convert<HashSet<EmailAddress>>();
-            //list2.ShouldBe<HashSet<EmailAddress>>();
-            //Assert.AreEqual(2, list2.Count);
-            //Assert.AreEqual("test2@domain.com", list2.ElementAt(1).Address);
+            var list2 = (new[] { "test@domain.com", "test2@domain.com" }).Convert<HashSet<EmailAddress>>();
+            list2.ShouldBe<HashSet<EmailAddress>>();
+            Assert.AreEqual(2, list2.Count);
+            Assert.AreEqual("test2@domain.com", list2.ElementAt(1).Address);
         }
     }
 }

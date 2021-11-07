@@ -91,7 +91,7 @@ namespace Smartstore.Core.Checkout.Cart
         {
             Guard.NotNull(cart, nameof(cart));
 
-            return cart.Items.Where(x => x.Item.IsShippingEnabled).Any();
+            return cart.Items.Any(x => x.Item.IsShippingEnabled);
         }
 
         /// <summary>

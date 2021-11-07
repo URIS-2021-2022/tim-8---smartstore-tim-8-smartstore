@@ -570,7 +570,6 @@ convert.hwb.rgb = function (hwb) {
 	var g;
 	var b;
 	switch (i) {
-		default:
 		case 6:
 		case 0: r = v; g = n; b = wh; break;
 		case 1: r = n; g = v; b = wh; break;
@@ -578,6 +577,7 @@ convert.hwb.rgb = function (hwb) {
 		case 3: r = wh; g = n; b = v; break;
 		case 4: r = n; g = wh; b = v; break;
 		case 5: r = v; g = wh; b = n; break;
+		default:
 	}
 
 	return [r * 255, g * 255, b * 255];

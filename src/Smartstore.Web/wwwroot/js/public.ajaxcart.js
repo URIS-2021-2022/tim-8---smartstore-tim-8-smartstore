@@ -39,7 +39,7 @@ var AjaxCart = (function ($, window, document, undefined) {
         };
 
         if (el.data("form-selector")) {
-            str = $(el.data("form-selector")).serialize();
+            let str = $(el.data("form-selector")).serialize();
 
             // HACK (MC)!
             // we changed the ModelType of the _AddToCart
