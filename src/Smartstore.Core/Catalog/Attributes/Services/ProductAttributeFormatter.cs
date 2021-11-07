@@ -48,7 +48,7 @@ namespace Smartstore.Core.Catalog.Attributes
         }
 
         public virtual async Task<string> FormatAttributesAsync(
-            ProductVariantAttributeSelection attributes,
+            ProductVariantAttributeSelection selection,
             Product product,
             Customer customer = null,
             string separator = "<br />",
