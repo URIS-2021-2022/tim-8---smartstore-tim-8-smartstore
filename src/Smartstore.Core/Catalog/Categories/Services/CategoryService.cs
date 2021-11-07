@@ -110,11 +110,9 @@ namespace Smartstore.Core.Catalog.Categories
                         if (deleteSubCategories)
                         {
                             category.Deleted = true;
+                            continue;
                         }
-                        else
-                        {
-                            category.ParentCategoryId = 0;
-                        }
+                        category.ParentCategoryId = 0;
                     }
 
                     // Process sub-categories.
@@ -263,7 +261,7 @@ namespace Smartstore.Core.Catalog.Categories
             var productEntityName = nameof(Product);
             var affectedCategories = 0;
             var affectedProducts = 0;
-            
+
             var allStoreIds = await _db.Stores
                 .AsQueryable()
                 .Select(x => x.Id)

@@ -25,7 +25,7 @@ namespace Smartstore.Data.MySql
         public override DbConnectionStringBuilder CreateConnectionStringBuilder(
             string server,
             string database,
-            string userId,
+            string userName,
             string password)
         {
             Guard.NotEmpty(server, nameof(server));
@@ -34,7 +34,7 @@ namespace Smartstore.Data.MySql
             {
                 Server = server,
                 Database = database,
-                UserID = userId,
+                UserID = userName,
                 Password = password,
                 Pooling = true,
                 MinimumPoolSize = 1,
@@ -63,29 +63,32 @@ namespace Smartstore.Data.MySql
             return (TContext)Activator.CreateInstance(typeof(TContext), new object[] { optionsBuilder.Options });
         }
 
+
         public override DbContextOptionsBuilder ConfigureDbContext(DbContextOptionsBuilder builder, string connectionString)
         {
             return builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), sql =>
             {
                 var extension = builder.Options.FindExtension<DbFactoryOptionsExtension>();
 
-                if (extension != null)
+                if (extension == null)
                 {
-                    if (extension.CommandTimeout.HasValue)
-                        sql.CommandTimeout(extension.CommandTimeout.Value);
-
-                    if (extension.MinBatchSize.HasValue)
-                        sql.MinBatchSize(extension.MinBatchSize.Value);
-
-                    if (extension.MaxBatchSize.HasValue)
-                        sql.MaxBatchSize(extension.MaxBatchSize.Value);
-
-                    if (extension.QuerySplittingBehavior.HasValue)
-                        sql.UseQuerySplittingBehavior(extension.QuerySplittingBehavior.Value);
-
-                    if (extension.UseRelationalNulls.HasValue)
-                        sql.UseRelationalNulls(extension.UseRelationalNulls.Value);
+                    return;
                 }
+
+                if (extension.CommandTimeout.HasValue)
+                    sql.CommandTimeout(extension.CommandTimeout.Value);
+
+                if (extension.MinBatchSize.HasValue)
+                    sql.MinBatchSize(extension.MinBatchSize.Value);
+
+                if (extension.MaxBatchSize.HasValue)
+                    sql.MaxBatchSize(extension.MaxBatchSize.Value);
+
+                if (extension.QuerySplittingBehavior.HasValue)
+                    sql.UseQuerySplittingBehavior(extension.QuerySplittingBehavior.Value);
+
+                if (extension.UseRelationalNulls.HasValue)
+                    sql.UseRelationalNulls(extension.UseRelationalNulls.Value);
             });
         }
 
@@ -101,12 +104,9 @@ namespace Smartstore.Data.MySql
             if (provider != null)
             {
                 var translators = _translatorsField.GetValue(provider) as List<IMethodCallTranslator>;
-                if (translators != null)
+                if (translators != null && sourceMethod.Name.StartsWith("DateDiff"))
                 {
-                    if (sourceMethod.Name.StartsWith("DateDiff"))
-                    {
-                        return translators.FirstOrDefault(x => x is MySqlDateDiffFunctionsTranslator);
-                    }
+                    return translators.FirstOrDefault(x => x is MySqlDateDiffFunctionsTranslator);
                 }
             }
 

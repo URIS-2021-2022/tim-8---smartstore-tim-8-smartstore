@@ -115,18 +115,18 @@ namespace Smartstore.Data.Caching
             {
             }
 
-            public override bool IsDatabaseProvider 
+            public override bool IsDatabaseProvider
                 => false;
 
-            private new CachingOptionsExtension Extension 
+            private new CachingOptionsExtension Extension
                 => (CachingOptionsExtension)base.Extension;
 
             // TODO: (core) (net6) What to do?
-            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            {
-                return true;
-            }
-            public override int GetServiceProviderHashCode()
+            //public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+            //{
+            //    return true;
+            //}
+            public override long GetServiceProviderHashCode()
             {
                 if (_serviceProviderHash == null)
                 {

@@ -248,27 +248,24 @@ namespace Smartstore.Core.Catalog.Search
             CancellationToken cancelToken)
             where TEntity : BaseEntity
         {
-            if (entry.InitialState == EState.Added || entry.InitialState == EState.Modified)
+            if ((entry.InitialState == EState.Added || entry.InitialState == EState.Modified) && baseEntity is ISearchAlias entity)
             {
-                if (baseEntity is ISearchAlias entity)
+                entity.Alias = SeoHelper.BuildSlug(entity.Alias, _seoSettings);
+                if (entity.Alias.HasValue())
                 {
-                    entity.Alias = SeoHelper.BuildSlug(entity.Alias, _seoSettings);
-                    if (entity.Alias.HasValue())
+                    var dbSet = _db.Set<TEntity>().AsNoTracking();
+
+                    //if (allEntities != null && allEntities.Any(x => x.Id != entity.Id && x.Alias == entity.Alias))
+                    if (dbSet is IQueryable<ISearchAlias> allEntities)
                     {
-                        var dbSet = _db.Set<TEntity>().AsNoTracking();
+                        var duplicateExists = hasDuplicate == null
+                            ? await allEntities.AnyAsync(x => x.Id != entity.Id && x.Alias == entity.Alias, cancelToken)
+                            : await hasDuplicate(dbSet, (TEntity)entity);
 
-                        //if (allEntities != null && allEntities.Any(x => x.Id != entity.Id && x.Alias == entity.Alias))
-                        if (dbSet is IQueryable<ISearchAlias> allEntities)
+                        if (duplicateExists)
                         {
-                            var duplicateExists = hasDuplicate == null
-                                ? await allEntities.AnyAsync(x => x.Id != entity.Id && x.Alias == entity.Alias, cancelToken)
-                                : await hasDuplicate(dbSet, (TEntity)entity);
-
-                            if (duplicateExists)
-                            {
-                                _errorMessage = CreateValueExistsMessage("Common.Error.AliasAlreadyExists", entity.Alias);
-                                return true;
-                            }
+                            _errorMessage = CreateValueExistsMessage("Common.Error.AliasAlreadyExists", entity.Alias);
+                            return true;
                         }
                     }
                 }
@@ -277,7 +274,7 @@ namespace Smartstore.Core.Catalog.Search
             return false;
         }
 
-        private async Task<bool> HasAliasDuplicate<T1, T2>(IHookedEntity entry, BaseEntity baseEntity, CancellationToken cancelToken) 
+        private async Task<bool> HasAliasDuplicate<T1, T2>(IHookedEntity entry, BaseEntity baseEntity, CancellationToken cancelToken)
             where T1 : BaseEntity where T2 : BaseEntity
         {
             if (entry.InitialState == EState.Added || entry.InitialState == EState.Modified)

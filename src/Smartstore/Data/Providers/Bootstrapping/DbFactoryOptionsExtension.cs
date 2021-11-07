@@ -71,7 +71,7 @@ namespace Smartstore.Data.Providers
             {
                 Guard.IsPositive(commandTimeout.Value, nameof(commandTimeout));
             }
-            
+
             var clone = Clone();
             clone.CommandTimeout = commandTimeout;
             return clone;
@@ -140,7 +140,7 @@ namespace Smartstore.Data.Providers
             {
                 throw new InvalidOperationException($"The data seeder '{typeof(TSeeder)}' is not compatible with the configured DbContext type '{_options.ContextType}'.");
             }
-            
+
             var clone = Clone();
             clone.DataSeederTypes = (DataSeederTypes ?? Type.EmptyTypes).Concat(new[] { typeof(TSeeder) });
             return clone;
@@ -160,18 +160,18 @@ namespace Smartstore.Data.Providers
             {
             }
 
-            public override bool IsDatabaseProvider 
+            public override bool IsDatabaseProvider
                 => false;
 
             private new DbFactoryOptionsExtension Extension
                 => (DbFactoryOptionsExtension)base.Extension;
 
             // TODO: (core) (net6) What to do?
-            public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            {
-                return true;
-            }
-            public override int GetServiceProviderHashCode()
+            //public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
+            //{
+            //    return true;
+            //}
+            public override long GetServiceProviderHashCode()
             {
                 if (_serviceProviderHash == null)
                 {
