@@ -442,21 +442,18 @@ namespace Smartstore.Core.Catalog.Attributes
 
                     while ((await pager.ReadNextPageAsync<ProductVariantAttributeCombination>()).Out(out var combinations))
                     {
-                        foreach (var combination in combinations)
+                        foreach (var combination in combinations.Where(x => combination.AttributeSelection.AttributesMap.Any()))
                         {
-                            if (combination.AttributeSelection.AttributesMap.Any())
-                            {
-                                // <ProductVariantAttribute.Id>:<ProductVariantAttributeValue.Id>[,...]
-                                var valuesKeys = combination.AttributeSelection.AttributesMap
-                                    .OrderBy(x => x.Key)
-                                    .Select(x => $"{x.Key}:{string.Join(",", x.Value.OrderBy(y => y))}");
+                            // <ProductVariantAttribute.Id>:<ProductVariantAttributeValue.Id>[,...]
+                            var valuesKeys = combination.AttributeSelection.AttributesMap
+                                .OrderBy(x => x.Key)
+                                .Select(x => $"{x.Key}:{string.Join(",", x.Value.OrderBy(y => y))}");
 
-                                data[string.Join("-", valuesKeys)] = new CombinationAvailabilityInfo
-                                {
-                                    IsActive = combination.IsActive,
-                                    IsOutOfStock = combination.StockQuantity <= 0 && !combination.AllowOutOfStockOrders
-                                };
-                            }
+                            data[string.Join("-", valuesKeys)] = new CombinationAvailabilityInfo
+                            {
+                                IsActive = combination.IsActive,
+                                IsOutOfStock = combination.StockQuantity <= 0 && !combination.AllowOutOfStockOrders
+                            };
                         }
                     }
                 }

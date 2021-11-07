@@ -349,9 +349,9 @@ namespace Smartstore.Core.Catalog.Attributes
                 {
                     var attributeSelection = new ProductVariantAttributeSelection(string.Empty);
 
-                    foreach (var value in values)
+                    foreach (var value in values.Select(value => value.id))
                     {
-                        attributeSelection.AddAttributeValue(mappedAttributes[value.Id].Id, value.Id);
+                        attributeSelection.AddAttributeValue(mappedAttributes[value].Id, value);
                     }
 
                     var combination = new ProductVariantAttributeCombination

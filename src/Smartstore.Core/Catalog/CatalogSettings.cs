@@ -313,7 +313,6 @@ namespace Smartstore.Core.Catalog
         /// Obsolete (an old setting that leads to a different price on the product and shopping cart page).
         /// Gets or sets a value indicating whether dynamic price update is enabled
         /// </summary>
-        //public bool EnableDynamicPriceUpdate { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether base price should be rendered for bundle items
