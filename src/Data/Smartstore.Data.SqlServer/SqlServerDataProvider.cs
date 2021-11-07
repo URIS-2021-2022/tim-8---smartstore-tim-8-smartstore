@@ -41,7 +41,7 @@ namespace Smartstore.Data.SqlServer
         {
         }
 
-        private string ReIndexTablesSql(string database)
+        private static string ReIndexTablesSql(string database)
             => $@"DECLARE @TableName sysname 
                   DECLARE cur_reindex CURSOR FOR
                   SELECT table_name
@@ -271,8 +271,6 @@ namespace Smartstore.Data.SqlServer
                             return true;
                         }
                     }
-
-
                     break;
                 }
 

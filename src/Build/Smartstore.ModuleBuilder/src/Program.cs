@@ -9,7 +9,7 @@ namespace Smartstore.ModuleBuilder
     class Program
     {
         static void Main(string[] args)
-        {   
+        {
             var modulePaths = string.Empty;
             var options = args[0].Trim().Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
@@ -49,56 +49,60 @@ namespace Smartstore.ModuleBuilder
             }
         }
 
+        private static void CopyFile(string filePath, string modulePath, object privateLib)
+        {
+            var sourceFile = new FileInfo(filePath);
+            var targetFile = new FileInfo(Path.Combine(modulePath, Path.GetFileName(filePath)));
+
+            if (!targetFile.Exists || sourceFile.Length != targetFile.Length || sourceFile.LastWriteTimeUtc != targetFile.LastWriteTimeUtc)
+            {
+                File.Copy(sourceFile.FullName, targetFile.FullName);
+                Console.WriteLine($"---- Copied private reference {privateLib} to {targetFile.FullName}");
+            }
+        }
+
+        private static bool CheckIfNull(object[] args)
+        {
+            foreach (var arg in args)
+            {
+                if (arg == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         static void DeployModule(string modulePath)
         {
             var moduleName = Path.GetFileName(modulePath);
             var moduleContext = ReadDependencyContext(Path.Combine(modulePath, $"{moduleName}.deps.json"));
-            if (moduleContext == null)
-            {
-                return;
-            }
-
             var moduleDescriptor = ReadModuleDescriptor(Path.Combine(modulePath, $"module.json"));
-            if (moduleDescriptor == null)
-            {
-                return;
-            }
-
             var privateLibs = moduleDescriptor.PrivateReferences;
-            if (privateLibs == null)
-            {
+
+            object[] objects = new object[] { moduleContext, moduleDescriptor, privateLibs };
+
+            if (CheckIfNull(objects))
                 return;
-            }
 
             foreach (var privateLib in privateLibs)
             {
                 var lib = moduleContext.CompileLibraries.FirstOrDefault(x => x.Name == privateLib);
-                if (lib == null) 
-                {
-                    Console.WriteLine($"---- Private reference {privateLib} does not exist.");
-                }
-                else
+                if (lib != null)
                 {
                     var paths = lib.ResolveReferencePaths();
                     if (paths != null)
                     {
                         foreach (var path in paths)
                         {
-                            var sourceFile = new FileInfo(path);
-                            var targetFile = new FileInfo(Path.Combine(modulePath, Path.GetFileName(path)));
-
-                            if (!targetFile.Exists || sourceFile.Length != targetFile.Length || sourceFile.LastWriteTimeUtc != targetFile.LastWriteTimeUtc)
-                            {
-                                File.Copy(sourceFile.FullName, targetFile.FullName);
-                                Console.WriteLine($"---- Copied private reference {privateLib} to {targetFile.FullName}");
-                            }
+                            CopyFile(path, modulePath, privateLib);
                         }
+                        continue;
                     }
-                    else
-                    {
-                        Console.WriteLine($"---- Private reference {privateLib} cannot be resolved.");
-                    }
+                    Console.WriteLine($"---- Private reference {privateLib} cannot be resolved.");
+                    continue;
                 }
+                Console.WriteLine($"---- Private reference {privateLib} does not exist.");
             }
         }
 
@@ -118,7 +122,7 @@ namespace Smartstore.ModuleBuilder
             {
                 return null;
             }
-            
+
             var reader = new DependencyContextJsonReader();
             using (var file = File.OpenRead(depsFilePath))
             {
@@ -144,7 +148,7 @@ namespace Smartstore.ModuleBuilder
 
                 if (entry is FileInfo fi)
                 {
-                    if (entry.Name.StartsWith("Smartstore.Data.") 
+                    if (entry.Name.StartsWith("Smartstore.Data.")
                         || entry.Name.EndsWith(".StaticWebAssets.xml", StringComparison.OrdinalIgnoreCase)
                         || entry.Name.EndsWith(".staticwebassets.runtime.json", StringComparison.OrdinalIgnoreCase))
                     {
@@ -153,11 +157,6 @@ namespace Smartstore.ModuleBuilder
                 }
             }
         }
-
-        //static string[] GetLibNames(DependencyContext context)
-        //{
-        //    return context.CompileLibraries.Where(x => x.Type == "package").Select(x => x.Name).ToArray();
-        //}
 
         class ModuleDescriptor
         {

@@ -44,29 +44,29 @@ namespace Smartstore.Core.Catalog.Categories
         #region static
 
         // Hierarchy affecting category prop names.
-        private static readonly string[] _h = new string[] 
+        private static readonly string[] _h = new string[]
         {
             nameof(Category.ParentCategoryId),
-            nameof(Category.Published), 
-            nameof(Category.Deleted), 
+            nameof(Category.Published),
+            nameof(Category.Deleted),
             nameof(Category.DisplayOrder)
         };
 
         // Visibility affecting category prop names.
-        private static readonly string[] _a = new string[] 
+        private static readonly string[] _a = new string[]
         {
-            nameof(Category.LimitedToStores), 
-            nameof(Category.SubjectToAcl) 
+            nameof(Category.LimitedToStores),
+            nameof(Category.SubjectToAcl)
         };
 
         // Data affecting category prop names.
-        private static readonly string[] _d = new string[] 
-        { 
-            nameof(Category.Name), 
-            nameof(Category.Alias), 
-            nameof(Category.ExternalLink), 
-            nameof(Category.MediaFileId), 
-            nameof(Category.BadgeText), 
+        private static readonly string[] _d = new string[]
+        {
+            nameof(Category.Name),
+            nameof(Category.Alias),
+            nameof(Category.ExternalLink),
+            nameof(Category.MediaFileId),
+            nameof(Category.BadgeText),
             nameof(Category.BadgeStyle)
         };
 
@@ -275,20 +275,17 @@ namespace Smartstore.Core.Catalog.Categories
                     await PublishEvent(CategoryTreeChangeReason.StoreMapping);
                 }
             }
-            else if (entity is AclRecord acl)
+            else if (entity is AclRecord acl && !acl.IsIdle)
             {
-                if (!acl.IsIdle)
+                if (acl.EntityName == "Product")
                 {
-                    if (acl.EntityName == "Product")
-                    {
-                        await PublishEvent(CategoryTreeChangeReason.ElementCounts);
-                    }
-                    else if (acl.EntityName == "Category")
-                    {
-                        // Don't nuke ACL agnostic trees.
-                        await _cache.RemoveByPatternAsync(BuildCacheKeyPattern("*", "[^0]*", "*"));
-                        await PublishEvent(CategoryTreeChangeReason.Acl);
-                    }
+                    await PublishEvent(CategoryTreeChangeReason.ElementCounts);
+                }
+                else if (acl.EntityName == "Category")
+                {
+                    // Don't nuke ACL agnostic trees.
+                    await _cache.RemoveByPatternAsync(BuildCacheKeyPattern("*", "[^0]*", "*"));
+                    await PublishEvent(CategoryTreeChangeReason.Acl);
                 }
             }
 
@@ -305,7 +302,7 @@ namespace Smartstore.Core.Catalog.Categories
 
         private async Task PublishEvent(CategoryTreeChangeReason reason)
         {
-            if (_handledReasons[(int)reason] == false)
+            if (!_handledReasons[(int)reason])
             {
                 await _eventPublisher.PublishAsync(new CategoryTreeChangedEvent(reason));
                 _handledReasons[(int)reason] = true;

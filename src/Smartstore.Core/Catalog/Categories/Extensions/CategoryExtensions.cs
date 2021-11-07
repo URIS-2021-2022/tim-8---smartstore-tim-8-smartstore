@@ -62,63 +62,6 @@ namespace Smartstore.Core.Catalog.Categories
             return result;
         }
 
-        class CategoryNodeSorter<T>
-            where T : ICategoryNode
-        {
-            private readonly IEnumerable<T> _source;
-            private readonly int _parentId;
-            private readonly bool _ignoreDetachedCategories;
-
-            public CategoryNodeSorter(IEnumerable<T> source, int parentId = 0, bool ignoreDetachedCategories = false)
-            {
-                _source = source;
-                _parentId = parentId;
-                _ignoreDetachedCategories = ignoreDetachedCategories;
-            }
-
-            public IEnumerable<T> Sort()
-            {
-                var sourceCount = _source.Count();
-                var result = new List<T>(sourceCount);
-                var lookup = _source.ToLookup(x => x.ParentCategoryId);
-
-                result.AddRange(SortInternal(_parentId, lookup));
-
-                if (!_ignoreDetachedCategories && result.Count != sourceCount)
-                {
-                    // Find categories without parent in provided category source and insert them into result.
-                    var resultLookup = result.ToDictionarySafe(x => x.Id);
-                    foreach (var cat in _source)
-                    {
-                        if (!resultLookup.ContainsKey(cat.Id))
-                        {
-                            result.Add(cat);
-                        }
-                    }
-                }
-
-                return result;
-            }
-
-            private IEnumerable<T> SortInternal(int parentId, ILookup<int, T> lookup)
-            {
-                if (!lookup.Contains(parentId))
-                {
-                    return Enumerable.Empty<T>();
-                }
-
-                var childNodes = lookup[parentId];
-                var result = new List<T>();
-                foreach (var node in childNodes)
-                {
-                    result.Add(node);
-                    result.AddRange(SortInternal(node.Id, lookup));
-                }
-
-                return result;
-            }
-        }
-
 
         /// <summary>
         /// Gets the indented name of a category.
@@ -155,7 +98,7 @@ namespace Smartstore.Core.Catalog.Categories
             {
                 sb.Append(" (");
                 sb.Append(cat.Alias);
-                sb.Append(")");
+                sb.Append(')');
             }
 
             return sb.ToString();
