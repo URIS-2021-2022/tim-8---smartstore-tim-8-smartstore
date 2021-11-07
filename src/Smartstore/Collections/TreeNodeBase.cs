@@ -332,7 +332,7 @@ namespace Smartstore.Collections
         {
             get
             {
-                return _children;
+                return ChildrenInternal;
             }
         }
 

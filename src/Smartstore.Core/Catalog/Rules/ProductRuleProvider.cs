@@ -87,10 +87,6 @@ namespace Smartstore.Core.Catalog.Rules
                 .Slice(pageIndex * pageSize, pageSize)
                 .SortBy(ProductSortingEnum.CreatedOn);
 
-            if(filters == null)
-            {
-                throw new ArgumentNullException("filters");
-            }
 
             if ((filters?.Length ?? 0) == 0)
             {
