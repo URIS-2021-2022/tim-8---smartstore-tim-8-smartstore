@@ -36,6 +36,7 @@ namespace Smartstore.Web.Filters
 
         public void OnProvidersExecuted(FilterProviderContext context)
         {
+            throw new NotSupportedException();
         }
     }
 }

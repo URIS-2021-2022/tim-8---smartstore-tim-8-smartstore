@@ -19,7 +19,7 @@
             };
         };
 
-        matched = uaMatch(navigator.userAgent);
+        let matched = uaMatch(navigator.userAgent);
         browser = {};
 
         if (matched.browser) {

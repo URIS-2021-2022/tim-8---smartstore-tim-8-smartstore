@@ -63,7 +63,7 @@ namespace Smartstore.Core.Installation
             Logger = _appContext.Logger;
         }
 
-        public ILogger Logger { get; set; } = NullLogger.Instance;
+        public ILogger Logger { get; set; };
 
         #region Installation
 

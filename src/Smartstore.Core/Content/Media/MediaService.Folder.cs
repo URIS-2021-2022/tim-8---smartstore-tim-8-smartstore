@@ -448,7 +448,11 @@ namespace Smartstore.Core.Content.Media
                             await DeleteFileAsync(lockedFile, true);
                             lockedFiles.Remove(lockedFile);
                         }
-                        catch { }
+                        catch (Exception e) 
+                        {
+                            Console.WriteLine("Exception caught: {0}", e);
+                            throw;
+                        }
                     }
 
                     await scope.CommitAsync(cancelToken);

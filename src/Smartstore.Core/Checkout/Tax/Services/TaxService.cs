@@ -356,7 +356,7 @@ namespace Smartstore.Core.Checkout.Tax
 
         #endregion
 
-        private class TaxAddressKey : Tuple<int, bool>
+        private sealed class TaxAddressKey : Tuple<int, bool>
         {
             public TaxAddressKey(int customerId, bool productIsEsd)
                 : base(customerId, productIsEsd)

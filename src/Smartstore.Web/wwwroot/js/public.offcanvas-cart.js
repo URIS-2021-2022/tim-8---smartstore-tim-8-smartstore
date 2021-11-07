@@ -161,7 +161,6 @@ $(function () {
         if (!shouldOpen && !isMenu) {
             // navigate to link (href target)
             e.stopPropagation();
-            return;
         }
         else {
             var el = $(this);

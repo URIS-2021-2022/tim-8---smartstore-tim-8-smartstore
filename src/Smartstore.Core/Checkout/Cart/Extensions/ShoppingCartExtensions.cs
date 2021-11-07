@@ -113,7 +113,7 @@ namespace Smartstore.Core.Checkout.Cart
         {
             Guard.NotNull(cart, nameof(cart));
 
-            return cart.Items.Where(x => x.Item.Product != null && matcher(x.Item.Product)).Any();
+            return cart.Items.Any(x => x.Item.Product != null && matcher(x.Item.Product));
         }
 
         /// <summary>

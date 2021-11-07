@@ -2398,7 +2398,6 @@
 				if (_opacityChanged && !_isZoomingIn && !_wasOverInitialZoom && _currZoomLevel < minZoomLevel) {
 					//_closedByScroll = true;
 					self.close();
-					return true;
 				}
 
 				if (_opacityChanged) {

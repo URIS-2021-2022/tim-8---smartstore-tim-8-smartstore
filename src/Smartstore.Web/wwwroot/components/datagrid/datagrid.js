@@ -590,7 +590,7 @@ Vue.component("sm-datagrid", {
         // #region Class & Style binding
 
         getTableClass() {
-            const cssClass = {
+            return ({
                 'dg-table': true,
                 'dg-striped': this.options.striped,
                 'dg-hover': this.options.hover,
@@ -598,9 +598,7 @@ Vue.component("sm-datagrid", {
                 'dg-vborders': this.options.vborders,
                 'dg-has-detailview': this.hasDetailView,
                 'dg-scrollable': this.isScrollable
-            };
-
-            return cssClass;
+            });
         },
 
         getTableStyles() {

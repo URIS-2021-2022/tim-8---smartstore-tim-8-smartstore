@@ -87,6 +87,7 @@ namespace Smartstore.Core.Catalog.Rules
                 .Slice(pageIndex * pageSize, pageSize)
                 .SortBy(ProductSortingEnum.CreatedOn);
 
+
             if ((filters?.Length ?? 0) == 0)
             {
                 return new CatalogSearchResult(searchQuery);
