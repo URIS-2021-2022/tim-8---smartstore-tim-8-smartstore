@@ -23,7 +23,7 @@ namespace Smartstore.Core.Catalog.Categories
 {
     public partial class CategoryService : ICategoryService, IXmlSitemapPublisher
     {
-        internal static readonly TimeSpan CategoryTreeCacheDuration = TimeSpan.FromHours(6);
+        internal static TimeSpan CategoryTreeCacheDuration = TimeSpan.FromHours(6);
 
         // {0} = IncludeHidden, {1} = CustomerRoleIds, {2} = StoreId
         internal const string CATEGORY_TREE_KEY = "category:tree-{0}-{1}-{2}";

@@ -58,7 +58,7 @@
 
             public static class Variant
             {
-                public const string Melf = "catalog.variant";
+                public const string Self = "catalog.variant";
                 public const string Read = "catalog.variant.read";
                 public const string Update = "catalog.variant.update";
                 public const string Create = "catalog.variant.create";

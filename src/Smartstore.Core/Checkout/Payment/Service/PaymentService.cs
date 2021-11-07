@@ -309,9 +309,8 @@ namespace Smartstore.Core.Checkout.Payment
                 result.Errors.Add(T("Common.Payment.NoCaptureSupport"));
                 return result;
             }
-            catch(Exception e)
+            catch
             {
-                Console.WriteLine("Exception caught: {0}", e);
                 throw;
             }
         }

@@ -256,9 +256,7 @@ namespace Smartstore.Core.Catalog.Products
                     // Do not create crappy URLs (exclude scheme, include port and no slash)!
                     hostName = new Uri(store.GetHost(true)).Authority;
                 }
-                catch (Exception e) {
-                    Console.WriteLine("Exception caught: {0}", e);
-                }
+                catch { }
 
                 url = _urlHelper.Value.RouteUrl(
                     "Product",
