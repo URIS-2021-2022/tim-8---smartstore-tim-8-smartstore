@@ -411,7 +411,7 @@ namespace Smartstore.Core.Identity
             return Task.FromResult(user.Password);
         }
 
-        public Task<bool> HasPasswordAsync(Customer user, CancellationToken cancellationToken = default)
+        public Task<bool> HasPasswordAsync(Customer user, CancellationToken cancellationToken )
         {
             return Task.FromResult(user.Password != null);
         }

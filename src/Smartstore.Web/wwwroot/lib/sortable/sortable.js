@@ -452,6 +452,7 @@
 
         while (last && (last === Sortable.ghost || css(last, 'display') === 'none' || selector && !matches(last, selector))) {
             last = last.previousElementSibling;
+
         }
 
         return last || null;

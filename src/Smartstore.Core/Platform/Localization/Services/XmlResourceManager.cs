@@ -525,9 +525,9 @@ namespace Smartstore.Core.Localization
                 return _comparison(x, y);
             }
 
-            public int Compare(object o1, object o2)
+            public int Compare(object x, object o2)
             {
-                return _comparison((T)o1, (T)o2);
+                return _comparison((T)x, (T)o2);
             }
         }
 

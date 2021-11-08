@@ -211,12 +211,10 @@ namespace Smartstore.Core.Catalog.Discounts
             }
 
             // Check coupon code.
-            if (discount.RequiresCouponCode)
+            if (discount.RequiresCouponCode && discount.CouponCode.IsEmpty() || !discount.CouponCode.EqualsNoCase(couponCodeToValidate))
             {
-                if (discount.CouponCode.IsEmpty() || !discount.CouponCode.EqualsNoCase(couponCodeToValidate))
-                {
                     return Cached(false);
-                }
+               
             }
 
             // Check date range.

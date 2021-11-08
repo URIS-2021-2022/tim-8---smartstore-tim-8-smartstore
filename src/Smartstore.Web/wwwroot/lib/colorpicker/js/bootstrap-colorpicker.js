@@ -1172,7 +1172,7 @@
 					'touchend.colorpicker': $.proxy(this.mouseup, this)
 				}).trigger('mousemove');
 			}
-			return false;
+			return true;
 		},
 		mousemove: function (e) {
 			if (!e.pageX && !e.pageY && e.originalEvent && e.originalEvent.touches) {

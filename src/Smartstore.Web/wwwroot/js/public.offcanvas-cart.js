@@ -282,7 +282,7 @@ var ShopBar = (function ($) {
             ShopBar.hideThrobber();
         });
 
-        ShopBar.loadSummary(data.type, true /*fade*/, function (resultData) { });
+        ShopBar.loadSummary(data.type, true /*fade*/, function (resultData) { /*The function is not defined yet*/ });
     });
 
     EventBroker.subscribe("ajaxcart.error", function (msg, data) {

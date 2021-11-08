@@ -959,12 +959,18 @@
 
         for (var type of types) {
             type = type.trim();
-            var o = {};
-            o[type[0] === '.' ? 'ext' : 'type'] = type;
-            icon = Smartstore.media.getIconHint(o);
-            if (!icon.isFallback) {
+            if (!type) {
                 break;
             }
+            else {
+                var o = {};
+                o[type[0] === '.' ? 'ext' : 'type'] = type;
+                icon = Smartstore.media.getIconHint(o);
+                if (!icon.isFallback) {
+                    break;
+                }
+            }
+            
         }
 
         icon = icon || Smartstore.media.getIconHint({});

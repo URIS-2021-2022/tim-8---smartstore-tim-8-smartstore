@@ -103,7 +103,7 @@ var AjaxCart = (function ($, window, document, undefined) {
                     }
 
                     // success is optional and therefore true by default
-                    isSuccess = response.success === undefined ? true : response.success;
+                    var isSuccess = response.success === undefined ? true : response.success;
 
                     var msg = cmd.action === "add" || cmd.action === "addfromwishlist" || cmd.action === "addfromcart" ? "ajaxcart.item.added" : "ajaxcart.item.removed";
                     EventBroker.publish(

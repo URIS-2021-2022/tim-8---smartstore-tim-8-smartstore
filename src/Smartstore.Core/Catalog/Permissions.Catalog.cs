@@ -28,7 +28,7 @@
 
             public static class ProductReview
             {
-                public const string Self = "catalog.productreview";
+                public const string Self_pr = "catalog.productreview";
                 public const string Read = "catalog.productreview.read";
                 public const string Update = "catalog.productreview.update";
                 public const string Create = "catalog.productreview.create";

@@ -22,7 +22,7 @@ namespace Smartstore.Engine.Modularity
     {
         private readonly IApplicationContext _appContext;
         private readonly SmartDbContext _db;
-        private readonly IComponentContext _ctx;
+
         private readonly ILocalizationService _locService;
         private readonly ISettingFactory _settingFactory;
         private readonly ISettingService _settingService;
@@ -43,7 +43,7 @@ namespace Smartstore.Engine.Modularity
         {
             _appContext = appContext;
             _db = db;
-            _ctx = ctx;
+      
             _locService = locService;
             _settingFactory = settingFactory;
             _settingService = settingService;
